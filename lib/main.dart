@@ -1,113 +1,325 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(PantallaPrincipal());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class PantallaPrincipal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: Colors.black26,
+        body: SafeArea(
+          child: UiTiktok(),
+        ),
+        bottomNavigationBar: iconsActions(),
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+
+  Widget iconsActions() {
+    return BottomNavigationBar(
+      backgroundColor: Colors.black,
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.white30,
+      type: BottomNavigationBarType.fixed,
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Padding(
+            padding: EdgeInsets.only(bottom: 3.0),
+            child: Image.asset('assets/icons/inicio.png'),
+          ),
+          title: Text(
+            'Inicio',
+            style: TextStyle(fontSize: 10),
+          ),
+        ),
+        BottomNavigationBarItem(
+          icon: Padding(
+            padding: EdgeInsets.only(bottom: 3.0),
+            child: Image.asset('assets/icons/tendencias.png'),
+          ),
+          title: Text(
+            'Tendencias',
+            style: TextStyle(fontSize: 10),
+          ),
+        ),
+        BottomNavigationBarItem(
+          icon: Padding(
+            padding: EdgeInsets.only(bottom: 3.0),
+            child: Image.asset('assets/icons/plus.png'),
+          ),
+          title: Container(),
+        ),
+        BottomNavigationBarItem(
+          icon: Padding(
+            padding: EdgeInsets.only(bottom: 3.0),
+            child: Image.asset('assets/icons/bandeja.png'),
+          ),
+          title: Text(
+            'Bandeja',
+            style: TextStyle(fontSize: 10),
+          ),
+        ),
+        BottomNavigationBarItem(
+          icon: Padding(
+            padding: EdgeInsets.only(bottom: 3.0),
+            child: Image.asset('assets/icons/yo.png'),
+          ),
+          title: Text(
+            'Yo',
+            style: TextStyle(fontSize: 10),
+          ),
+        ),
+      ],
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
+class UiTiktok extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+    return Stack(
+      // fit: StackFit.expand,
+      children: [
+        Image.asset(
+          'assets/post.jpg',
+          fit: BoxFit.cover,
+          height: double.infinity,
+        ),
+        blackGradiante(),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            topBar(),
+            Column(
+              children: [
+                actionBar(),
+                postDetalle(),
+              ],
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
+  Widget blackGradiante() {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: <Color>[
+            Colors.black87,
+            Colors.black26,
+            Colors.black26,
+            Colors.black26,
+            Colors.black54,
+            Colors.black87,
+          ],
+        ),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+    );
+  }
+
+  Widget topBar() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Column(
+            children: [
+              Text(
+                'Siguiendo',
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Container(
+                width: 40,
+                height: 2,
+                color: Colors.white,
+              )
+            ],
+          ),
+          SizedBox(
+            width: 30,
+          ),
+          Column(
+            children: [
+              Text(
+                'Para ti',
+                style: TextStyle(fontSize: 18, color: Colors.white30),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Container(
+                width: 30,
+                height: 2,
+                color: Colors.white30,
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget actionBar() {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Padding(
+        padding: const EdgeInsets.only(right: 5),
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25),
+                border: Border.all(
+                  color: Colors.white,
+                ),
+              ),
+              child: ClipOval(
+                child: Image.asset(
+                  'assets/perfil.jpg',
+                  width: 45,
+                  height: 45,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Image.asset('assets/icons/corazon.png'),
+            SizedBox(
+              height: 5,
             ),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              '189.3k',
+              style: TextStyle(
+                fontSize: 10,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Image.asset('assets/icons/comentarios.png'),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              '1.500k',
+              style: TextStyle(
+                fontSize: 10,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Image.asset('assets/icons/compartir.png'),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              '180',
+              style: TextStyle(
+                fontSize: 10,
+                color: Colors.white,
+              ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  Widget postDetalle() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 15, right: 8, bottom: 15),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                '@MarlenYS',
+                style: TextStyle(fontSize: 12, color: Colors.white),
+              ),
+              SizedBox(
+                width: 8,
+              ),
+              Text(
+                '5:25',
+                style: TextStyle(fontSize: 12, color: Colors.white54),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            children: [
+              Flexible(
+                child: Column(
+                  children: [
+                    Text(
+                      'FELIZ ANIVERSARIO AMOR !!! tantos buenos momentos a tu lado linda.',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Image.asset(
+                          'assets/icons/musica.png',
+                          width: 20,
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Text(
+                          'Mi corazon Encantado',
+                          style: TextStyle(color: Colors.white60, fontSize: 13),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: 15,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  border: Border.all(
+                    color: Colors.white24,
+                    width: 8,
+                  ),
+                ),
+                child: ClipOval(
+                  child: Image.asset(
+                    'assets/perfil.jpg',
+                    width: 25,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
